@@ -43,30 +43,31 @@ end)
 
 --safe
 Citizen.CreateThread(function(pos)
-	while true do
-		Citizen.Wait(5)
+    while true do
+        Citizen.Wait(5)
         local coords = GetEntityCoords(PlayerPedId())
-		local playerPos = GetEntityCoords(PlayerPedId(), true)
+        local playerPos = GetEntityCoords(PlayerPedId(), true)
 
-		for i=1, #Config.safePositions, 1 do
-			local distance = #(Config.safePositions[i].pos-coords)
+        for i=1, #Config.safePositions, 1 do
+            local distance = #(Config.safePositions[i].pos-coords)
 
-				if not holdingUp then
-					if distance < 0.5 then
-						Draw3DText(Config.safePositions[i].pos, L("robb_text"), 0.35)
+                if not holdingUp then
+                    if distance < 0.5 then
+                        Draw3DText(Config.safePositions[i].pos, L("robb_text"), 0.35)
                         if IsControlJustPressed(0,38) then
-                        if not robbing then
-                            robbing = true
-							aloitasafepaska()
-                        
-                        end
-
+							ESX.TriggerServerCallback('LD_storerobbery:itemicheek', function(maara) 
+                                if maara > 0 then
+                                    if not robbing then
+                                        robbing = true
+                                        aloitasafepaska()
+                                end
+                            end	
+                        end)
                     end
-                
                 end
-			end
-		end
-	end
+            end
+        end
+    end
 end)
 
 
