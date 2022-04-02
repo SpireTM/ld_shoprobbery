@@ -22,7 +22,7 @@ Citizen.CreateThread(function()
 
 				if not holdingUp then
 					if distance < 0.5 then
-						Draw3DText(Config.shelfPositions[i].pos, L("robb_text"), 0.35)
+					Draw3DText(Config.shelfPositions[i].pos, L("robb_text"), 0.35)
                         if IsControlJustPressed(0,38) then
                         if not robbing then
                             robbing = true
@@ -126,7 +126,7 @@ end)
 function aloitasafepaska()
     ESX.TriggerServerCallback('LD_storerobbery:poliis', function(cops) 
         if cops >= Config.safe.poliseneed then
-         local res = exports['pd-safe']:createSafe({math.random(0,99)})
+           local res = exports["pd-safe"]:createSafe({math.random(0,99),math.random(0,99),math.random(0,99)})
         if res then
           TriggerServerEvent("LD_storerobbery:safe", a, GetEntityCoords(PlayerPedId()))
 		robbing = false
