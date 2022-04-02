@@ -12,30 +12,30 @@ end)
 
 --shelf
 Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(5)
+    local SleepThread = 200
+    while true do
         local coords = GetEntityCoords(PlayerPedId())
-		local playerPos = GetEntityCoords(PlayerPedId(), true)
+        local playerPos = GetEntityCoords(PlayerPedId(), true)
 
-		for i=1, #Config.shelfPositions, 1 do
-			local distance = #(Config.shelfPositions[i].pos-coords)
-
-				if not holdingUp then
-					if distance < 0.5 then
-					Draw3DText(Config.shelfPositions[i].pos, L("robb_text"), 0.35)
-                        if IsControlJustPressed(0,38) then
+        for i=1, #Config.shelfPositions, 1 do
+            local distance = #(Config.shelfPositions[i].pos-coords)
+            if not holdingUp then
+                if distance < 0.5 then
+                    SleepThread = 5
+                    Draw3DText(Config.shelfPositions[i].pos, L("robb_text"), 0.35)
+                    if IsControlJustPressed(0,38) then
                         if not robbing then
                             robbing = true
                             StartAnimation(i)
                         end
                     elseif IsControlJustPressed(0,73) then
-                    cancelled = true
+                        cancelled = true
                     end
-                
                 end
-			end
-		end
-	end
+            end
+        end
+        Citizen.Wait(SleepThread)
+    end
 end)
 
 --safe
@@ -141,8 +141,6 @@ function aloitasafepaska()
 end
 
 
-
-
 function StartAnimation(a)
 	local p = PlayerPedId()
 	ClearPedTasks(p)
@@ -162,27 +160,17 @@ function StartAnimation(a)
 	end)
 end
 
-
-
-
 function Draw3DText(coords, text, scale)
-	local onScreen, x, y = World3dToScreen2d(coords.x, coords.y, coords.z)
-	SetTextScale(scale, scale)
-	SetTextOutline()
-	SetTextDropShadow()
-	SetTextDropshadow(2, 0, 0, 0, 255)
-	SetTextFont(4)
-	SetTextProportional(1)
-	SetTextEntry('STRING')
-	SetTextCentre(1)
-	SetTextColour(255, 255, 255, 215)
-	AddTextComponentString(text)
-	DrawText(x, y)
-    local factor = (string.len(text)) / 400
-    DrawRect(x, y+0.012, 0.015+ factor, 0.03, 41, 11, 41, 68)
+	SetTextScale(0.35, 0.35)
+    SetTextFont(4)
+    SetTextProportional(1)
+    SetTextColour(255, 255, 255, 215)
+    SetTextEntry("STRING")
+    SetTextCentre(true)
+    AddTextComponentString(text)
+    SetDrawOrigin(x,y,z, 0)
+    DrawText(0.0, 0.0)
+    local factor = (string.len(text)) / 370
+    DrawRect(0.0, 0.0+0.0125, 0.017+ factor, 0.03, 0, 0, 0, 75)
+    ClearDrawOrigin()
 end
-
-
-
-
-
