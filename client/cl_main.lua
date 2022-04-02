@@ -10,9 +10,6 @@ Citizen.CreateThread(function ()
     end
 end)
 
-local safecoooldown = {}
-
-
 --shelf
 Citizen.CreateThread(function()
 	while true do
@@ -105,27 +102,6 @@ AddEventHandler('LD_storerobbery:shelf_policealert', function(pos)
 			SetBlipColour(copblip, 8)
 			BeginTextCommandSetBlipName("STRING")
 			AddTextComponentString(L"alerblip_name")
-			EndTextCommandSetBlipName(copblip)
-			PulseBlip(copblip)
-			Wait(Config.HowLongBlipStays*1000)
-			RemoveBlip(copblip)
-		end)
-	end
-end
-end)
-
-RegisterNetEvent('LD_storerobbery:policealert')
-AddEventHandler('LD_storerobbery:policealert', function(pos)
-	if ESX.PlayerData.job.name ~= nil then
-		if ESX.PlayerData.job.name == Config.jobname  then
-		CreateThread(function()
-			muggi(L"police_alert")
-			local copblip = AddBlipForCoord(pos)
-			SetBlipSprite(copblip , 161)
-			SetBlipScale(copblipy , 2.0)
-			SetBlipColour(copblip, 8)
-			BeginTextCommandSetBlipName("STRING")
-			AddTextComponentString("Konttimurto")
 			EndTextCommandSetBlipName(copblip)
 			PulseBlip(copblip)
 			Wait(Config.HowLongBlipStays*1000)
