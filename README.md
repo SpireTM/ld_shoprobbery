@@ -1,6 +1,6 @@
 # ld_shoprobbery
 
-prewiev: SOON
+prewiev: https://streamable.com/rt80kh
 
 uneed add location default noly grove shop work
 
